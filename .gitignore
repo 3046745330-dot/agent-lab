@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 密钥（绝对不推）
+.env
+.env.local
+*.key
+
+# 验收产物
+验收/*.json
+*.log
