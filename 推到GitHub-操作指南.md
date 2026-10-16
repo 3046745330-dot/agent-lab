@@ -1,18 +1,18 @@
 # 推到 GitHub：一步一步来
 
-> 目标：把 ai-group 变成面试官**能点开看**的仓库。
+> 目标：把 ai-group 变成面试官**能点开看**的仓库。  
 > 前置：Git 已装好（`C:\Users\yyy\Git`），ai-group 已 commit（96 个文件，0.52 MB）。
 
 ---
 
 ## 第 0 步：先想清楚推哪个
 
-| 仓库 | 推吗 | 为什么 |
-|---|---|---|
-| **ai-group** | ✅ **必须推** | 你最值钱的项目，简历第一个项目 |
-| **agent-lab** | ✅ 推 | 展示学习过程，commit 历史本身就是证据 |
-| campus-market | ❌ 已舍弃 | 你自己说的 |
-| AI工作群-Tauri版 | ❌ **千万别推** | 里面有你的真实聊天记录和配置 |
+| 仓库            | 推吗         | 为什么                    |
+| ------------- | ---------- | ---------------------- |
+| **ai-group**  | ✅ **必须推**  | 你最值钱的项目，简历第一个项目        |
+| **agent-lab** | ✅ 推        | 展示学习过程，commit 历史本身就是证据 |
+| campus-market | ❌ 已舍弃      | 你自己说的                  |
+| AI工作群-Tauri版  | ❌ **千万别推** | 里面有你的真实聊天记录和配置         |
 
 > ⚠️ **推之前必须确认**：`.gitignore` 已排除 `data/`（聊天记录）、`.env`（密钥）、`dist/`、`build/`、`ai-group-window-profile/`。我已验证这四项**都是 0 个文件被跟踪**。
 
@@ -20,13 +20,14 @@
 
 ## 第 1 步：注册 / 登录 GitHub
 
-1. 打开 https://github.com/signup
+1. 打开 <https://github.com/signup>
 2. 用户名建议：**用真名拼音**（如 `huangyuming`）——面试官看到会觉得专业
    - ❌ 别用 `abc123`、`xiaoming666` 这类
    - ✅ 或者和你 gitee 那个 `huang-yuming1234` 保持一致的风格
 3. 记下你的用户名，等下要用
 
 > **网络提示**：本机实测 `github.com` 网页直连超时，但 **git 协议能通**（我已用 `git ls-remote` 验证过）。所以：
+>
 > - 网页注册如果打不开 → 用手机热点 / 或先注册再想办法
 > - `git push` 本身没问题
 
@@ -39,7 +40,7 @@
    - **Repository name**：`ai-group`
    - **Description**：`多厂商大模型群聊协作系统：组长派发、组员响应、记录员汇总，Web 实时流式展示`
    - 选 **Public**（公开，面试官才看得到）
-   - ⚠️ **不要**勾 "Add a README file"、**不要**勾 .gitignore、**不要**选 license
+   - ⚠️ **不要**勾 "Add a README file"、**不要**勾 .gitignore、**不要**选 license  
      （因为本地已经有内容了，勾了会冲突）
 3. 点 **Create repository**
 4. 建完后页面会显示一串命令，**先别管**，按下面做
@@ -64,6 +65,7 @@ git push -u origin main
 ```
 
 **会弹出登录窗口**：
+
 - 选 **Sign in with your browser**（浏览器登录最省事）
 - 或者用 **Personal Access Token**（见下面"常见问题"）
 
@@ -93,6 +95,7 @@ git push -u origin main
 ## 第 5 步：回来告诉我用户名
 
 推完之后告诉我你的 GitHub 用户名，我立刻：
+
 1. 把简历里的 `github.com/YOUR_GITHUB_ID` 换成真实链接
 2. 重新生成简历 DOCX
 
@@ -104,7 +107,7 @@ git push -u origin main
 
 GitHub 从 2021 年起**不再接受账号密码**，必须用 **Personal Access Token**：
 
-1. 打开 https://github.com/settings/tokens
+1. 打开 <https://github.com/settings/tokens>
 2. **Generate new token** → **classic**
 3. Note 随便写（如 `local-git`），Expiration 选 90 天
 4. 勾选 **repo**（整个 repo 大项）
@@ -145,5 +148,5 @@ git ls-files | Select-String -Pattern "env|data/|credential"
 - **docs/evidence/ 50+ 份证据**——这是你最稀缺的东西
 - **commit 历史**——证明是持续开发的，不是某天批量上传
 
-> 对比：你图 1 里被批评的那个人，被批的是"全是 gpt 一键生成的项目，自己有没有深入了解过每个组件具体逻辑都是问题"。
+> 对比：你图 1 里被批评的那个人，被批的是"全是 gpt 一键生成的项目，自己有没有深入了解过每个组件具体逻辑都是问题"。  
 > **有证据留档的仓库，恰恰是对这句话最有力的反驳。**
