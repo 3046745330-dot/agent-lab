@@ -136,6 +136,36 @@ curl https://open.bigmodel.cn/api/paas/v4/chat/completions \
 
 > 注意 `choices` 是**数组**——因为可以一次要多个候选答案（`n` 参数）。默认 1 个，但结构还是数组，所以必须写 `choices[0]`。
 
+### ⚠️ 一个会咬你的细节：`content` 可能是空字符串
+
+写验收脚本时我实测发现：**有些模型是"思考型"的**，它会先生成一大段内部思考
+（字段叫 `reasoning_content`），再输出正文。
+
+**关键点：思考的内容也计入 `max_tokens` 预算。**
+
+实测 `glm-4.5-flash`，问「用一句话解释什么是无状态」：
+
+```
+max_tokens= 100  finish=length  content=  0字  reasoning=184字   ← 正文为空！
+max_tokens= 200  finish=length  content= 23字  reasoning=313字   ← 还是被截断
+max_tokens= 500  finish=stop    content= 46字  reasoning=357字   ← 这才正常
+```
+
+注意 `finish_reason=length`——它告诉你"被 max_tokens 截断了"。
+但如果你只看 `content` 是空的，很容易以为是代码写错了。
+
+**所以本课的验收脚本里 `max_tokens` 默认给 100 是危险的。** 排查思路是：
+
+1. 看到 `content` 为空 → **先看 `finish_reason`**
+2. 如果是 `length` → 要么调大 `max_tokens`，要么换个非思考型模型
+3. 打印完整响应看看有没有 `reasoning_content` 字段
+
+> 这个坑在真实开发里很常见。你在 ai-group 里也踩过同一个：
+> `kimi-k2.6` 是思考型，`max_tokens` 给 1500 正文为空、给 3000 才有正文。
+>
+> **通用规律：思考型模型的 `max_tokens` 要按"思考 + 正文"两部分预留。**
+> 或者干脆选非思考型的模型（本课用的是 `glm-4-air`）。
+
 ---
 
 ## 四、错误处理：错误体才是宝藏
